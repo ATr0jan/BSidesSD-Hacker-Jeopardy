@@ -131,7 +131,7 @@ def handle_reveal(data):
 
 @socketio.on('manual_score_adjust')
 def handle_manual_adjust(data):
-    updated_teams = game.update_score(data['name'], data['amount'], True, manual=True)
+    updated_teams = game.update_score(data['name'], data['amount'], True)
     emit('update_ui', {"teams": updated_teams}, broadcast=True)
 
 @socketio.on('request_sync')
