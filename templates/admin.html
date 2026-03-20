@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Control Deck | Jeopardy!</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+    <div class="admin-wrapper">
+        <header class="admin-header">
+            <h2>Host Control Deck</h2>
+        </header>
+
+        <div class="admin-grid-section">
+            <div class="admin-grid">
+                {% for category in round_data.categories %}
+                    {% set cat_idx = loop.index0 %}
+                <div class="admin-column">
+                    <div class="admin-header">{{ category.category_name }}</div>
+                    {% for clue in category.clues %}
+                    <button class="admin-clue-btn" 
+                        id="admin-clue-{{ cat_idx }}-{{ loop.index0 }}"
+                        onclick="openClue('{{ cat_idx }}', '{{ loop.index0 }}')">
+                        <span class="val">${{ clue.value }}</span>
+                        <span class="ans-preview">{{ clue.answer[:15] }}...</span>
+                    </button>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <footer class="admin-footer">
+            <div class="footer-left">
+                <button id="next-round-btn" class="btn-next hidden" onclick="advanceRound()">
+                    Start Double Jeopardy
+                </button>
+                
+                <div id="final-jeopardy-setup" class="hidden">
+                    <button class="btn-primary" onclick="revealFinalClue()">Reveal Final Clue</button>
+                </div>
+            </div>
+
+            <div class="utility-box">
+                <small>SYSTEM CONTROLS</small>
+                <div class="utility-buttons">
+                    <button onclick="requestSync()" class="btn-sync">🔄 Sync</button>
+                    <button onclick="confirmReset()" class="btn-reset">⚠️ Reset</button>
+                    <a href="/export_results" target="_blank" class="btn-export" style="text-decoration:none; padding: 5px 10px; background: #28a745; color: white; border-radius: 4px; font-size: 12px;">📊 Export</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Main Judging Modal -->
+    <div id="judging-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modal-category">Category</h3>
+            <h2 id="modal-value">$0</h2>
+
+            <!-- DAILY DOUBLE WAGER SECTION -->
+            <div id="wager-section" class="hidden" style="background: #222; padding: 20px; border-radius: 8px; border: 2px solid #ffcc00; margin-bottom: 15px;">
+                <h3 style="color: #ffcc00; margin-top: 0;">DAILY DOUBLE!</h3>
+                <p>Enter the team's paper wager:</p>
+                <input type="number" id="wager-input-field" placeholder="Enter Amount" style="font-size: 1.5em; width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 4px; border: none;">
+                <button onclick="confirmWager()" class="btn-primary" style="width: 100%; padding: 15px; background: #ffcc00; color: black; font-weight: bold; cursor: pointer; border: none; border-radius: 4px;">CONFIRM WAGER & REVEAL</button>
+            </div>
+
+            <!-- NORMAL CLUE REVEAL SECTION -->
+            <div id="clue-reveal-section">
+                <div class="clue-box">
+                    <p><strong>CLUE:</strong> <span id="display-clue-text"></span></p>
+                    <p><strong>ANSWER:</strong> <span id="display-answer-text"></span></p>
+                </div>
+                
+                <h4>Who Buzzed In?</h4>
+                <div id="team-buttons-container">
+                    <!-- Buttons injected by admin.js -->
+                </div>
+                
+                <div class="verdict-actions">
+                    <button onclick="sendVerdict(true)" class="btn-correct">CORRECT</button>
+                    <button onclick="sendVerdict(false)" class="btn-incorrect">INCORRECT</button>
+                    <button onclick="closeModal(true)" class="btn-cancel">NO ONE GOT IT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        // Initialize global data from Flask
+        window.gameData = {{ round_data | tojson | safe }};
+        window.teams = {{ state.teams | tojson | safe }};
+
+        const socket = io();
+
+        // Listen for global state updates
+        socket.on('update_ui', (data) => {
+            if (data.teams) {
+                window.teams = data.teams;
+                // Refresh team buttons in modal if it's open
+                if (typeof buildTeamButtons === 'function') {
+                    buildTeamButtons();
+                }
+            }
+            
+            if (data.played_clues) {
+                data.played_clues.forEach(clueId => {
+                    const btn = document.getElementById(`admin-clue-${clueId}`);
+                    if (btn) btn.classList.add('played');
+                });
+            }
+
+            if (data.reset) {
+                location.reload(); 
+            }
+        });
+
+        function advanceRound() {
+            socket.emit('next_round');
+        }
+
+        socket.on('change_round', (data) => {
+            location.reload(); 
+        });
+
+        function requestSync() {
+            socket.emit('request_sync');
+        }
+
+        function confirmReset() {
+            if (confirm("Are you sure? This wipes all scores and clues!")) {
+                socket.emit('reset_game');
+            }
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

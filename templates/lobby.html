@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy! Setup</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby.css') }}">
+</head>
+<body>
+
+    <div class="lobby-screen">
+        <div class="lobby-container">
+            <h1 class="logo-text">JEOPARDY! SETUP</h1>
+            <p class="subtitle">Enter the contestants for this round</p>
+            
+            <div id="team-input-list">
+                <div class="team-input-group">
+                    <input type="text" class="team-name-input" placeholder="Team 1 Name">
+                </div>
+                <div class="team-input-group">
+                    <input type="text" class="team-name-input" placeholder="Team 2 Name">
+                </div>
+            </div>
+
+            <div class="lobby-actions">
+                <button type="button" id="add-team-btn" class="secondary-btn">+ Add Team</button>
+                <button type="button" id="start-game-btn">LAUNCH GAME</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/lobby.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Board | Jeopardy!</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
+</head>
+<body>
+
+    <div id="game-board" class="jeopardy-grid">
+        {# Name the outer loop 'cat_loop' #}
+        {% for category in round_data.categories %}
+        {% set cat_idx = loop.index0 %}
+        <div class="category-column">
+            <div class="category-header">
+                {{ category.category_name | upper }}
+            </div>
+
+            {# Name the inner loop 'clue_loop' #}
+            {% for clue in category.clues %}
+            {% set clue_idx = loop.index0 %}
+            
+            {# Construct the ID using the saved cat_idx #}
+            {% set clue_id = cat_idx ~ '-' ~ clue_idx %}
+            
+            <div class="clue-card {% if clue_id in state.played_clues %}played{% endif %}" 
+                 id="clue-{{ clue_id }}"
+                 data-value="{{ clue.value }}">
+                ${{ clue.value }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="clue-overlay" class="hidden">
+        <div id="timer-bar"></div>
+        <div id="clue-text"></div>
+    </div>
+
+    <div id="scoreboard-container">
+        {% for team in state.teams %}
+        <div class="team-card" id="team-card-{{ team.name }}">
+            <div class="team-name">{{ team.name }}</div>
+            <div class="team-score">${{ team.score }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        // Passing the data directly as an object is safer than parsing a string with single quotes
+        window.gameData = {{ round_data | tojson | safe }};
+        window.teams = {{ state.teams | tojson | safe }};
+    </script>
+    <script src="{{ url_for('static', filename='js/board.js') }}"></script>
+</body>
+</html>

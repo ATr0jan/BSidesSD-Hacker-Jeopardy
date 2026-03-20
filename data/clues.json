@@ -1,0 +1,153 @@
+{
+  "game_metadata": {
+    "title": "Ultimate Tech & Code Trivia",
+    "date": "2026-01-01"
+  },
+  "rounds": [
+    {
+      "round_name": "Jeopardy",
+      "categories": [
+        {
+          "category_name": "Python Basics",
+          "clues": [
+            {"value": 200, "clue_text": "This 4-letter keyword is used to define a function.", "answer": "What is def?"},
+            {"value": 400, "clue_text": "Python's name was inspired by this British comedy troupe.", "answer": "Who is Monty Python?"},
+            {"value": 600, "clue_text": "This data type is an ordered collection that is immutable.", "answer": "What is a tuple?"},
+            {"value": 800, "clue_text": "The function used to get the number of items in a list.", "answer": "What is len()?"},
+            {"value": 1000, "clue_text": "This special method is called when a class is instantiated.", "answer": "What is __init__?"}
+          ]
+        },
+        {
+          "category_name": "Web Dev",
+          "clues": [
+            {"value": 200, "clue_text": "This 'Language' is the standard markup for creating web pages.", "answer": "What is HTML?"},
+            {"value": 400, "clue_text": "It stands for Cascading Style Sheets.", "answer": "What is CSS?"},
+            {"value": 600, "clue_text": "This JS runtime allows you to run JavaScript on the server.", "answer": "What is Node.js?"},
+            {"value": 800, "clue_text": "An HTTP 404 error code indicates this status.", "answer": "What is Not Found?", "daily_double": true},
+            {"value": 1000, "clue_text": "This 'JSON' acronym stands for this.", "answer": "What is JavaScript Object Notation?"}
+          ]
+        },
+        {
+          "category_name": "Hardware",
+          "clues": [
+            {"value": 200, "clue_text": "The 'Pi' in Raspberry Pi stands for this language.", "answer": "What is Python?"},
+            {"value": 400, "clue_text": "This component is the 'brain' of the computer.", "answer": "What is the CPU?"},
+            {"value": 600, "clue_text": "A standard Raspberry Pi 4 uses this USB port type for power.", "answer": "What is USB-C?"},
+            {"value": 800, "clue_text": "This 3-letter acronym refers to the screen's 'dots per inch'.", "answer": "What is DPI?"},
+            {"value": 1000, "clue_text": "The 'G' in GPU stands for this.", "answer": "What is Graphics?"}
+          ]
+        },
+        {
+          "category_name": "The Cloud",
+          "clues": [
+            {"value": 200, "clue_text": "AWS is the cloud platform owned by this retail giant.", "answer": "Who is Amazon?"},
+            {"value": 400, "clue_text": "This 2-letter Google cloud service is popular for running Python scripts in the browser.", "answer": "What is Colab?"},
+            {"value": 600, "clue_text": "Azure is the cloud computing service created by this company.", "answer": "Who is Microsoft?"},
+            {"value": 800, "clue_text": "This 'S' in SaaS stands for this.", "answer": "What is Software?"},
+            {"value": 1000, "clue_text": "This whale-themed tool is used for 'containerization'.", "answer": "What is Docker?"}
+          ]
+        },
+        {
+          "category_name": "Linux & OS",
+          "clues": [
+            {"value": 200, "clue_text": "The command 'ls' is used to do this in the terminal.", "answer": "What is List files/directories?"},
+            {"value": 400, "clue_text": "This Linux command stands for 'SuperUser Do'.", "answer": "What is sudo?"},
+            {"value": 600, "clue_text": "The mascot of Linux is this flightless bird.", "answer": "Who is Tux (the penguin)?"},
+            {"value": 800, "clue_text": "This command is used to move or rename files.", "answer": "What is mv?"},
+            {"value": 1000, "clue_text": "This 4-letter command is used to change file permissions.", "answer": "What is chmod?"}
+          ]
+        },
+        {
+          "category_name": "Buzzwords",
+          "clues": [
+            {"value": 200, "clue_text": "This 'AI' stands for this.", "answer": "What is Artificial Intelligence?"},
+            {"value": 400, "clue_text": "This 'IOT' refers to everyday objects connected to the internet.", "answer": "What is Internet of Things?"},
+            {"value": 600, "clue_text": "A decentralized ledger used for cryptocurrencies.", "answer": "What is Blockchain?"},
+            {"value": 800, "clue_text": "This 'UI' refers to what the user sees on the screen.", "answer": "What is User Interface?"},
+            {"value": 1000, "clue_text": "This 2-letter term refers to the practice of blending dev and operations.", "answer": "What is DevOps?"}
+          ]
+        }
+      ]
+    },
+    {
+      "round_name": "Double Jeopardy",
+      "categories": [
+        {
+          "category_name": "Silicon Valley",
+          "clues": [
+            {"value": 400, "clue_text": "This company's first office was in a garage in Palo Alto.", "answer": "Who is HP (Hewlett-Packard)?"},
+            {"value": 800, "clue_text": "The 'Netflix of gaming' platform was originally known as Project Stream.", "answer": "What is Google Stadia?"},
+            {"value": 1200, "clue_text": "This 'PayPal Mafia' member founded SpaceX and Tesla.", "answer": "Who is Elon Musk?"},
+            {"value": 1600, "clue_text": "The headquarters of Apple is called 'Apple' this, shaped like a ring.", "answer": "What is Park?"},
+            {"value": 2000, "clue_text": "Intel was founded in this California city.", "answer": "What is Mountain View?"}
+          ]
+        },
+        {
+          "category_name": "Data Structures",
+          "clues": [
+            {"value": 400, "clue_text": "This structure follows 'LIFO': Last In, First Out.", "answer": "What is a Stack?"},
+            {"value": 800, "clue_text": "This structure follows 'FIFO': First In, First Out.", "answer": "What is a Queue?"},
+            {"value": 1200, "clue_text": "This structure consists of nodes where each node points to the next.", "answer": "What is a Linked List?"},
+            {"value": 1600, "clue_text": "A search algorithm that splits the list in half each time.", "answer": "What is Binary Search?"},
+            {"value": 2000, "clue_text": "This 4-letter term refers to a map that associates keys with values.", "answer": "What is a Hash (or Dict)?"}
+          ]
+        },
+        {
+          "category_name": "Cybersecurity",
+          "clues": [
+            {"value": 400, "clue_text": "A type of software designed to cause damage to a computer.", "answer": "What is Malware?"},
+            {"value": 800, "clue_text": "The practice of sending fake emails to steal passwords.", "answer": "What is Phishing?"},
+            {"value": 1200, "clue_text": "This 'VPN' stands for this.", "answer": "What is Virtual Private Network?", "daily_double": true},
+            {"value": 1600, "clue_text": "A hacker who uses their skills for good/ethical purposes.", "answer": "What is a White Hat?"},
+            {"value": 2000, "clue_text": "This 2FA acronym stands for this.", "answer": "What is Two-Factor Authentication?"}
+          ]
+        },
+        {
+          "category_name": "Compilers & Code",
+          "clues": [
+            {"value": 400, "clue_text": "This 'C' language was developed at Bell Labs in the 70s.", "answer": "What is C?"},
+            {"value": 800, "clue_text": "A language that translates code line-by-line as it runs.", "answer": "What is an Interpreted language?"},
+            {"value": 1200, "clue_text": "This mascot of the Go language is a rodent.", "answer": "What is the Gopher?"},
+            {"value": 1600, "clue_text": "The original name for the Java programming language.", "answer": "What is Oak?"},
+            {"value": 2000, "clue_text": "This compiler translates high-level code directly into machine code.", "answer": "What is a Native Compiler?"}
+          ]
+        },
+        {
+          "category_name": "Old School Tech",
+          "clues": [
+            {"value": 400, "clue_text": "This 1980s storage device had a '3.5 inch' version.", "answer": "What is a Floppy Disk?"},
+            {"value": 800, "clue_text": "ENIAC was the first general-purpose electronic computer, built in this decade.", "answer": "What is the 1940s?"},
+            {"value": 1200, "clue_text": "This company released the first commercial smartphone, the Simon, in 1994.", "answer": "Who is IBM?"},
+            {"value": 1600, "clue_text": "Before Google, this search engine's name meant 'highest point'.", "answer": "What is AltaVista?"},
+            {"value": 2000, "clue_text": "The first computer mouse was made of this material.", "answer": "What is Wood?"}
+          ]
+        },
+        {
+          "category_name": "Mobile Dev",
+          "clues": [
+            {"value": 400, "clue_text": "This mobile OS is developed by Google.", "answer": "What is Android?"},
+            {"value": 800, "clue_text": "The primary language used for modern iOS development.", "answer": "What is Swift?"},
+            {"value": 1200, "clue_text": "A 'cross-platform' framework developed by Facebook.", "answer": "What is React Native?"},
+            {"value": 1600, "clue_text": "The package manager used for Android apps.", "answer": "What is Gradle?"},
+            {"value": 2000, "clue_text": "The first iPhone was released in this year.", "answer": "What is 2007?"}
+          ]
+        }
+      ]
+    }
+  ],
+  "final_jeopardy": {
+    "category": "Computing History",
+    "clue_text": "In 1945, Grace Hopper recorded the first 'actual' one of these in a logbook—literally a moth stuck in a relay.",
+    "answer": "What is a Bug?"
+  },
+  "tie_breakers": [
+    {
+      "clue_text": "This 19th-century mathematician is considered the world's first computer programmer.",
+      "answer": "Who is Ada Lovelace?"
+    },
+    {
+      "clue_text": "In networking, this 4-letter acronym stands for the unique address assigned to every device.",
+      "answer": "What is an IP address?"
+    }
+  ]
+}
