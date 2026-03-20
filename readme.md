@@ -1,4 +1,6 @@
-This **Quick-Start Guide** summarizes everything we’ve built. Follow these steps in order, and you’ll have a fully functional Jeopardy game running on your network.
+# Quick-Start Guide
+
+Follow these steps in order, and you’ll have a fully functional Jeopardy game running on your network.
 
 ---
 
@@ -59,5 +61,3 @@ Once the game is live, your workflow as the host looks like this:
 * [ ] `clues.json` has at least 6 categories for a full board.
 * [ ] You have a way to play sounds (external speakers on the TV).
 * [ ] The TV is set as an "Extended Display" (not mirrored) so you can keep the Admin panel hidden from players.
-
-**You're all set to host! Would you like me to help you draft some "How to Play" instructions to show on the Board before the game starts, or are you ready to go?**
