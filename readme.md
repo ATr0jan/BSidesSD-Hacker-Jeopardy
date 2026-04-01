@@ -39,7 +39,7 @@ The Lobby will automatically redirect you to `http://localhost:5000/admin`. Keep
 
 ---
 
-### 3. Gameplay Flow (The "Host" Routine)
+### 4. Gameplay Flow (The "Host" Routine)
 
 Once the game is live, your workflow as the host looks like this:
 
@@ -59,7 +59,7 @@ Once the game is live, your workflow as the host looks like this:
 
 ---
 
-### 4. Clue.json Format
+### 5. Clue.json Format
 
 Clue Format should be 
 ```json
@@ -94,7 +94,7 @@ The game expects a specific structure for rounds, final jeopardy, and tie breake
 
 ---
 
-### 5. Critical Troubleshooting
+### 6. Critical Troubleshooting
 
 * **Connection Issues:** If the Board isn't updating, refresh the `/board` page first, then the `/admin` page.
 * **Accessing via Raspberry Pi:** Find your computer's IP address (e.g., `192.168.1.15`). On the Pi's browser, go to `http://192.168.1.15:5000/board`.
@@ -103,7 +103,7 @@ The game expects a specific structure for rounds, final jeopardy, and tie breake
 
 ---
 
-### 6. Final Checklist
+### 7. Final Checklist
 
 * [ ] `app.py` is running.
 * [ ] `clues.json` has at least 6 categories for a full board.
