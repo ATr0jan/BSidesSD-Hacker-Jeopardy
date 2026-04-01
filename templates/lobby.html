@@ -15,15 +15,31 @@
 
     <div class="lobby-screen">
         <div class="lobby-container">
-            <h1 class="logo-text">JEOPARDY! SETUP</h1>
-            <p class="subtitle">Enter the contestants for this round</p>
+            <h1 class="logo-text">HACKER JEOPARDY!</h1>
+            <h2 class="logo-text">SETUP</h2>
             
+            <div class="mode-selection">
+                <label class="switch">
+                    <input type="checkbox" id="multiplier-mode-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <label>Wheel of Chaos</label>
+            </div>
+
+            <div class="mode-selection">
+                <label class="switch">
+                    <input type="checkbox" id="daily-double-checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <label>Daily Doubles</label>
+            </div>
+            <p class="subtitle">Enter the contestants for this round</p>
             <div id="team-input-list">
                 <div class="team-input-group">
-                    <input type="text" class="team-name-input" placeholder="Team 1 Name">
+                    <input type="text" class="team-name-input" placeholder="Team 1">
                 </div>
                 <div class="team-input-group">
-                    <input type="text" class="team-name-input" placeholder="Team 2 Name">
+                    <input type="text" class="team-name-input" placeholder="Team 2">
                 </div>
             </div>
 

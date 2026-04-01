@@ -23,6 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputs = document.querySelectorAll('.team-name-input');
         const teamNames = []; 
 
+        // Capture the selected game mode
+        const modeToggle = document.getElementById('multiplier-mode-checkbox');
+        const isMultiplierMode = modeToggle ? modeToggle.checked : false;
+
+        const ddToggle = document.getElementById('daily-double-checkbox');
+        const isDailyDoubleEnabled = ddToggle ? ddToggle.checked : true;
+
         inputs.forEach(input => {
             const name = input.value.trim();
             if (name !== "") {
@@ -48,7 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Send strings and metadata to the server
         socket.emit('initialize_game', { 
             teams: teamNames,
-            metadata: sessionMetadata
+            metadata: sessionMetadata,
+            multiplier_mode: isMultiplierMode,
+            daily_doubles_enabled: isDailyDoubleEnabled
          });
     });
 

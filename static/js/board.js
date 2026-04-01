@@ -36,10 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Handle Clue Reveal (Normal or DD with Wager)
         let displayText = data.text;
-        if (data.is_daily_double && data.wager) {
-            displayText = `<div style="font-size: 0.6em; color: #ffcc00; margin-bottom: 10px;">WAGER: $${data.wager}</div>` + data.text;
+        if (data.multiplier && data.multiplier !== 1) {
+            displayText = `<div style="font-size: 2.5rem; color: #00ff00;">WHEEL MULTIPLIER: x${data.multiplier}</div>` + data.text;
+        } else if (data.is_daily_double && data.wager) {
+            displayText = `<div style="font-size: 2.5rem; color: #ffcc00;">WAGER: $${data.wager}</div>` + data.text;
         }
 
         textEl.innerHTML = displayText;
@@ -70,6 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hide timer bar for Daily Doubles
             const timerBar = document.getElementById('timer-bar');
             if (timerBar) timerBar.style.width = '0%';
+        }
+    });
+
+    socket.on('reveal_answer', function(data) {
+        clearInterval(timerInterval); // Stop the timer if it's running
+        const textEl = document.getElementById('clue-text');
+        const overlay = document.getElementById('clue-overlay');
+        
+        if (textEl && overlay) {
+            textEl.innerHTML = `<div style="font-size: 2rem; color: #ffcc00;">CORRECT ANSWER:</div>${data.answer}`;
+            overlay.classList.remove('hidden'); // Ensure the audience can see it
         }
     });
 
@@ -114,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (overlay) overlay.classList.add('hidden');
             
             document.querySelectorAll('.team-card').forEach(c => {
-                c.classList.remove('is-active', 'has-control');
+                c.classList.remove('is-active');
             });
             
             const gridSquare = document.getElementById(`clue-${data.clue_id}`);
@@ -152,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('board_show_final_category', function(data) {
         const textEl = document.getElementById('clue-text');
         if (textEl) {
-            textEl.innerHTML = `<div style="font-size:0.5em; text-transform:uppercase; margin-bottom:10px;">Final Jeopardy Category</div>${data.category}`;
+            textEl.innerHTML = `<div style="font-size: 2rem; color: white;">Final Jeopardy Category</div>${data.category}`;
             document.getElementById('clue-overlay').classList.remove('hidden');
             playSound('think_theme.mp3');
         }
