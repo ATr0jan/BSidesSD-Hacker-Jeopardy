@@ -7,6 +7,7 @@ let multiplierMode = false;
 let currentMultiplier = 1;
 let dailyDoublesEnabled = true;
 let currentControlTeam = null;
+let finalJeopardyData = null;
 
 /**
  * Robust helper to extract a string name from the team data.
@@ -263,6 +264,33 @@ function advanceRound() {
 }
 
 function revealFinalClue() {
+    if (!finalJeopardyData) return;
+
+    // Prepare a virtual clue object for the judging logic
+    activeClue = { 
+        clue_text: finalJeopardyData.clue_text, 
+        answer: finalJeopardyData.answer, 
+        value: 0, // Set to 0 so host can use manual adjustment for custom wagers
+        catIdx: 999, // Unique dummy ID
+        clueIdx: 999
+    };
+
+    // Populate Modal text with Final Jeopardy info
+    document.getElementById('modal-category').innerText = "FINAL JEOPARDY";
+    document.getElementById('modal-value').innerText = finalJeopardyData.category;
+    document.getElementById('display-clue-text').innerText = activeClue.clue_text;
+    document.getElementById('display-answer-text').innerText = activeClue.answer;
+
+    // Ensure judging sections are visible and reset state
+    currentBuzzedTeam = null;
+    document.getElementById('wager-section').classList.add('hidden');
+    document.getElementById('multiplier-section').classList.add('hidden');
+    document.getElementById('clue-reveal-section').classList.remove('hidden');
+
+    // Open the modal and build team buttons for judging
+    document.getElementById('judging-modal').classList.remove('hidden');
+    buildTeamButtons();
+
     socket.emit('reveal_final_clue');
     document.getElementById('final-jeopardy-setup').classList.add('hidden');
 }
@@ -313,7 +341,8 @@ socket.on('change_round', (data) => {
     location.reload(); 
 });
 
-socket.on('admin_final_ready', () => {
+socket.on('admin_final_ready', (data) => {
+    finalJeopardyData = data;
     document.getElementById('next-round-btn').classList.add('hidden');
     document.getElementById('final-jeopardy-setup').classList.remove('hidden');
 });

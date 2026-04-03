@@ -151,7 +151,7 @@ def handle_next_round():
         final_data = game.get_final_jeopardy()
         if final_data:
             emit('board_show_final_category', {"category": final_data["category"]}, broadcast=True)
-            emit('admin_final_ready', broadcast=True)
+            emit('admin_final_ready', final_data, broadcast=True)
 
 @socketio.on('reveal_final_clue')
 def handle_reveal_final():

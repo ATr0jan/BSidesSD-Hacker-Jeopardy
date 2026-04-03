@@ -136,6 +136,35 @@ body, html {
     justify-content: center;
 }
 
+#final-jeopardy-setup {
+    text-align: center;
+    padding: 20px;
+    margin-top: 10px;
+    border: 2px dashed #060ce9;
+    background: rgba(6, 12, 233, 0.1);
+    border-radius: 8px;
+}
+
+#final-jeopardy-setup button {
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#final-jeopardy-setup button:hover {
+    background: #ffd633;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
 /* --- MODAL (Judging) --- */
 .modal {
     position: fixed;
