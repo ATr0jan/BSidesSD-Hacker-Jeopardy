@@ -180,6 +180,20 @@ body.double-jeopardy {
     z-index: 10000;
 }
 
+/* --- WHEEL OF CHAOS SPLASH --- */
+.wheel-splash {
+    font-family: 'Impact', sans-serif;
+    font-size: 5rem;
+    color: #00ff00;
+    text-shadow: 4px 4px 0px #000;
+    animation: wheel-glow 1.5s infinite alternate;
+}
+
+@keyframes wheel-glow {
+    from { text-shadow: 0 0 10px #00ff00, 4px 4px 0px #000; }
+    to { text-shadow: 0 0 30px #00ff00, 4px 4px 0px #000; transform: scale(1.05); }
+}
+
 .negative-score { color: #ff4444 !important; }
 
 /* --- THE HIDDEN CLASS (Crucial) --- */

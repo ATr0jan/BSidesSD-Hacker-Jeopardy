@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // 1b. Handle Wheel of Chaos Splash Screen
+        if (data.is_wheel_of_chaos && data.show_splash) {
+            textEl.innerHTML = `<div class="wheel-splash">WHEEL OF CHAOS</div><div style="font-size: 1.5rem; color: #fff; margin-top: 20px;">SPIN THE WHEEL!</div>`;
+            overlay.classList.remove('hidden');
+            return;
+        }
+
         let displayText = data.text;
         if (data.multiplier && data.multiplier !== 1) {
             displayText = `<div style="font-size: 2.5rem; color: #00ff00;">WHEEL MULTIPLIER: x${data.multiplier}</div>` + data.text;
@@ -134,8 +141,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (data.team_who_answered) {
-            if (data.was_correct) playSound('correct.mp3');
-            else playSound('wrong.mp3');
+            if (data.was_correct) {
+                playSound('correct.mp3');
+                clearInterval(timerInterval); // Stop the countdown
+                
+                const textEl = document.getElementById('clue-text');
+                const overlay = document.getElementById('clue-overlay');
+                const timerBar = document.getElementById('timer-bar');
+                
+                if (textEl && overlay && data.answer) {
+                    // Clear timer bar visual
+                    if (timerBar) timerBar.style.width = '0%';
+                    
+                    // Reveal the answer for 10 seconds
+                    textEl.innerHTML = `<div style="font-size: 2rem; color: #ffcc00;">CORRECT!</div>${data.answer}`;
+                    
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                        document.querySelectorAll('.team-card').forEach(c => c.classList.remove('is-active'));
+                        const gridSquare = document.getElementById(`clue-${data.clue_id}`);
+                        if (gridSquare) gridSquare.classList.add('played');
+                    }, 10000);
+                }
+            } else {
+                playSound('wrong.mp3');
+                // Remove buzz-in highlight so others can try
+                document.querySelectorAll('.team-card').forEach(c => c.classList.remove('is-active'));
+            }
         }
     });
 

@@ -171,6 +171,13 @@ function openClue(catIdx, clueIdx) {
         document.getElementById('multiplier-section').classList.remove('hidden');
         document.getElementById('clue-reveal-section').classList.add('hidden');
         document.getElementById('wager-section').classList.add('hidden');
+
+        // Show Wheel of Chaos splash on the main board
+        socket.emit('admin_reveal_clue', {
+            is_wheel_of_chaos: true,
+            show_splash: true
+        });
+
         setTimeout(() => document.getElementById('multiplier-input-field').focus(), 10);
     } else {
         document.getElementById('wager-section').classList.add('hidden');
@@ -235,6 +242,7 @@ function sendVerdict(isCorrect) {
     socket.emit('submit_verdict', {
         team_name: currentBuzzedTeam,
         correct: isCorrect,
+        answer: activeClue.answer,
         value: finalValue,
         cat_idx: activeClue.catIdx,
         clue_idx: activeClue.clueIdx

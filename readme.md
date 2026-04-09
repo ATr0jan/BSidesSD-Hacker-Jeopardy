@@ -98,7 +98,7 @@ The game expects a specific structure for rounds, final jeopardy, and tie breake
 
 * **Connection Issues:** If the Board isn't updating, refresh the `/board` page first, then the `/admin` page.
 * **Accessing via Raspberry Pi:** Find your computer's IP address (e.g., `192.168.1.15`). On the Pi's browser, go to `http://192.168.1.15:5000/board`.
-* **JSON Errors:** If the game won't start, ensure your `clues.json` is in a folder named `data` and follows the format we discussed exactly.
+* **JSON Errors:** If the game won't start, ensure your `clues.json` is in a folder named `data` and follows the format we discussed exactly. If you are unsure about `clues.json`, you can run `validate_json.py` to check for errors.
 * **No Audio** Be sure to click anywhere on the Viewers Board to unlock sounds. Check F12 for Errors.
 
 ---

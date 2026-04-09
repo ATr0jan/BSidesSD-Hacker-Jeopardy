@@ -104,10 +104,11 @@ def handle_verdict(data):
     emit('update_ui', {
         "teams": updated_teams,
         "played_clues": game.played_clues,
-        "close_clue": is_correct,
+        "close_clue": False, # Don't close immediately; let the board handle the delay if correct
         "clue_id": f"{cat_idx}-{clue_idx}",
         "team_who_answered": team_name,
         "was_correct": is_correct,
+        "answer": data.get('answer'),
         "control_team": game.control_team
     }, broadcast=True)
 
