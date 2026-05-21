@@ -1,3 +1,9 @@
+/* BSidesSD Hacker Jeopardy - A full Web App with Admin Panel and Viewerboards.
+*
+* Copyright (C) 2026 Atr0jan <ATr0j4n@Gmail.com>
+* SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
 let activeClue = null;
 let currentBuzzedTeam = null;
 let currentWager = 0;

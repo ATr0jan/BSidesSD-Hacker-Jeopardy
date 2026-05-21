@@ -1,3 +1,9 @@
+/* BSidesSD Hacker Jeopardy - A full Web App with Admin Panel and Viewerboards.
+*
+* Copyright (C) 2026 Atr0jan <ATr0j4n@Gmail.com>
+* SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
 document.addEventListener('DOMContentLoaded', () => {
     const socket = io(); 
 
