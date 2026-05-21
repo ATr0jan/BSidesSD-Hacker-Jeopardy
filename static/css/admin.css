@@ -142,6 +142,35 @@ body, html {
     justify-content: center;
 }
 
+#final-jeopardy-setup {
+    text-align: center;
+    padding: 20px;
+    margin-top: 10px;
+    border: 2px dashed #060ce9;
+    background: rgba(6, 12, 233, 0.1);
+    border-radius: 8px;
+}
+
+#final-jeopardy-setup button {
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#final-jeopardy-setup button:hover {
+    background: #ffd633;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
 /* --- MODAL (Judging) --- */
 .modal {
     position: fixed;
@@ -182,6 +211,11 @@ body, html {
 /* --- DAILY DOUBLE UI --- */
 #wager-section h3 {
     animation: dd-pulse 1s infinite alternate;
+}
+
+#multiplier-section h3 {
+    color: #28a745;
+    text-align: center;
 }
 
 @keyframes dd-pulse {
@@ -257,6 +291,7 @@ body, html {
 
 .btn-correct { background: #28a745; color: white; border: none; padding: 15px; flex: 1; border-radius: 6px; font-weight: bold; cursor: pointer; }
 .btn-incorrect { background: #dc3545; color: white; border: none; padding: 15px; flex: 1; border-radius: 6px; font-weight: bold; cursor: pointer; }
+.btn-reveal { background: #060ce9; color: white; border: none; padding: 15px; flex: 1; border-radius: 6px; font-weight: bold; cursor: pointer; }
 .btn-cancel { background: #6c757d; color: white; border: none; padding: 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
 .hidden { display: none !important; }
@@ -271,4 +306,48 @@ body, html {
 .admin-grid-section::-webkit-scrollbar-thumb {
     background: #333;
     border-radius: 4px;
+}
+
+/* --- FOOTER SCORES --- */
+.admin-footer-scores {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    overflow-x: auto;
+    margin: 0 15px;
+    flex: 1;
+    justify-content: center;
+}
+
+.footer-score-pill {
+    background: #111;
+    border: 1px solid #333;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.footer-score-pill.has-control {
+    border: 2px solid #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
+}
+
+.footer-score-pill .team-name {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.footer-score-pill .team-val {
+    font-family: 'Impact', sans-serif;
+    color: #ffcc00;
+    font-size: 1.1rem;
+}
+
+.footer-score-pill .team-val.negative {
+    color: #ff4444;
 }

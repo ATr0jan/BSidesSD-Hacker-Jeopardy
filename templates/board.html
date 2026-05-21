@@ -46,7 +46,7 @@
 
     <div id="scoreboard-container">
         {% for team in state.teams %}
-        <div class="team-card" id="team-card-{{ team.name }}">
+        <div class="team-card {% if state.control_team == team.name %}has-control{% endif %}" id="team-card-{{ team.name }}">
             <div class="team-name">{{ team.name }}</div>
             <div class="team-score">${{ team.score }}</div>
         </div>

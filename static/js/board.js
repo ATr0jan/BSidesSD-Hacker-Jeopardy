@@ -42,10 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Handle Clue Reveal (Normal or DD with Wager)
+        // 1b. Handle Wheel of Chaos Splash Screen
+        if (data.is_wheel_of_chaos && data.show_splash) {
+            textEl.innerHTML = `<div class="wheel-splash">WHEEL OF CHAOS</div><div style="font-size: 1.5rem; color: #fff; margin-top: 20px;">SPIN THE WHEEL!</div>`;
+            overlay.classList.remove('hidden');
+            return;
+        }
+
         let displayText = data.text;
-        if (data.is_daily_double && data.wager) {
-            displayText = `<div style="font-size: 0.6em; color: #ffcc00; margin-bottom: 10px;">WAGER: $${data.wager}</div>` + data.text;
+        if (data.multiplier && data.multiplier !== 1) {
+            displayText = `<div style="font-size: 2.5rem; color: #00ff00;">WHEEL MULTIPLIER: x${data.multiplier}</div>` + data.text;
+        } else if (data.is_daily_double && data.wager) {
+            displayText = `<div style="font-size: 2.5rem; color: #ffcc00;">WAGER: $${data.wager}</div>` + data.text;
         }
 
         textEl.innerHTML = displayText;
@@ -76,6 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hide timer bar for Daily Doubles
             const timerBar = document.getElementById('timer-bar');
             if (timerBar) timerBar.style.width = '0%';
+        }
+    });
+
+    socket.on('reveal_answer', function(data) {
+        clearInterval(timerInterval); // Stop the timer if it's running
+        const textEl = document.getElementById('clue-text');
+        const overlay = document.getElementById('clue-overlay');
+        
+        if (textEl && overlay) {
+            textEl.innerHTML = `<div style="font-size: 2rem; color: #ffcc00;">CORRECT ANSWER:</div>${data.answer}`;
+            overlay.classList.remove('hidden'); // Ensure the audience can see it
         }
     });
 
@@ -120,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (overlay) overlay.classList.add('hidden');
             
             document.querySelectorAll('.team-card').forEach(c => {
-                c.classList.remove('is-active', 'has-control');
+                c.classList.remove('is-active');
             });
             
             const gridSquare = document.getElementById(`clue-${data.clue_id}`);
@@ -128,8 +147,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (data.team_who_answered) {
-            if (data.was_correct) playSound('correct.mp3');
-            else playSound('wrong.mp3');
+            if (data.was_correct) {
+                playSound('correct.mp3');
+                clearInterval(timerInterval); // Stop the countdown
+                
+                const textEl = document.getElementById('clue-text');
+                const overlay = document.getElementById('clue-overlay');
+                const timerBar = document.getElementById('timer-bar');
+                
+                if (textEl && overlay && data.answer) {
+                    // Clear timer bar visual
+                    if (timerBar) timerBar.style.width = '0%';
+                    
+                    // Reveal the answer for 10 seconds
+                    textEl.innerHTML = `<div style="font-size: 2rem; color: #ffcc00;">CORRECT!</div>${data.answer}`;
+                    
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                        document.querySelectorAll('.team-card').forEach(c => c.classList.remove('is-active'));
+                        const gridSquare = document.getElementById(`clue-${data.clue_id}`);
+                        if (gridSquare) gridSquare.classList.add('played');
+                    }, 10000);
+                }
+            } else {
+                playSound('wrong.mp3');
+                // Remove buzz-in highlight so others can try
+                document.querySelectorAll('.team-card').forEach(c => c.classList.remove('is-active'));
+            }
         }
     });
 
@@ -158,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('board_show_final_category', function(data) {
         const textEl = document.getElementById('clue-text');
         if (textEl) {
-            textEl.innerHTML = `<div style="font-size:0.5em; text-transform:uppercase; margin-bottom:10px;">Final Jeopardy Category</div>${data.category}`;
+            textEl.innerHTML = `<div style="font-size: 2rem; color: white;">Final Jeopardy Category</div>${data.category}`;
             document.getElementById('clue-overlay').classList.remove('hidden');
             playSound('think_theme.mp3');
         }

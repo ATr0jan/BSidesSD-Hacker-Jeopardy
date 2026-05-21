@@ -13,6 +13,10 @@ class JeopardyGame:
         self.teams = []
         self.current_round_index = 0  # 0 for Jeopardy, 1 for Double Jeopardy
         self.played_clues = []        # Tracks "catIdx-clueIdx" to dim them on the board
+        self.multiplier_mode = False  # Toggle for custom wheel rules
+        self.daily_doubles_enabled = True
+        self.control_team = None      # Tracks which team has the floor
+        self.tie_breaker_index = 0    # Tracks which tie-breaker question to show next
 
     def _load_data(self):
         with open(self.json_path, 'r', encoding='utf-8') as f:
@@ -66,5 +70,8 @@ class JeopardyGame:
         return {
             "teams": self.teams,
             "current_round": self.data["rounds"][self.current_round_index]["round_name"],
-            "played_clues": self.played_clues
+            "played_clues": self.played_clues,
+            "multiplier_mode": self.multiplier_mode,
+            "daily_doubles_enabled": self.daily_doubles_enabled,
+            "control_team": self.control_team
         }

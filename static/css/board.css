@@ -95,10 +95,8 @@ body.double-jeopardy {
     width: 100vw;
     height: 100vh;
     background-color: var(--bg-blue) !important;
-    display: flex;           /* JS toggles 'hidden' class to change this */
-    flex-direction: column;             /* Allows bar at top, text in middle */
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     z-index: 1000 !important;
 }
 
@@ -106,7 +104,13 @@ body.double-jeopardy {
     color: white;
     font-size: 4.5rem;
     text-align: center;
-    padding: 5% 10%;
+    padding: 0 10%;
+    flex: 1; /* Occupies all space below the prefix */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     text-shadow: 3px 3px 5px #000;
     line-height: 1.2;
@@ -159,15 +163,15 @@ body.double-jeopardy {
 }
 
 .team-card.has-control {
-    border: 3px solid #00ff00 !important;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+    border: 6px solid #ffcc00 !important;
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.8);
 }
 
 .team-card.has-control::after {
     content: " • CONTROL";
     font-size: 0.7rem;
     display: block;
-    color: #00ff00;
+    color: #ffcc00;
 }
 
 /* Ensure the timer bar stays at the very top of the fixed overlay */
@@ -180,6 +184,20 @@ body.double-jeopardy {
     background-color: #ffcc00;
     transition: width 1s linear, background-color 0.5s;
     z-index: 10000;
+}
+
+/* --- WHEEL OF CHAOS SPLASH --- */
+.wheel-splash {
+    font-family: 'Impact', sans-serif;
+    font-size: 5rem;
+    color: #00ff00;
+    text-shadow: 4px 4px 0px #000;
+    animation: wheel-glow 1.5s infinite alternate;
+}
+
+@keyframes wheel-glow {
+    from { text-shadow: 0 0 10px #00ff00, 4px 4px 0px #000; }
+    to { text-shadow: 0 0 30px #00ff00, 4px 4px 0px #000; transform: scale(1.05); }
 }
 
 .negative-score { color: #ff4444 !important; }
